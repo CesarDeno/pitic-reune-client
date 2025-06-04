@@ -14,6 +14,7 @@ const Login = ({ setToken }) => {
 
       const url = process.env.REACT_APP_API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
       const credentials = { username, password };
+
       try {
          const response = await axios.post(url, credentials, {
             headers: { "Content-Type": "application/json" },
@@ -33,33 +34,39 @@ const Login = ({ setToken }) => {
 
    return (
       <Box
-         minWidth={300}
-         margin="auto"
-         mt={10}
-         display="flex"
-         flexDirection="column"
-         gap={2}
-         sx={{ borderRadius: 2, boxShadow: 2, p: 5, bgcolor: "white" }}
+         sx={{
+            width: "100%",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+         }}
       >
-         <Typography variant="h5" textAlign="center">
+         <Typography textAlign="center" sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff" }}>
             REDECO
          </Typography>
          <Typography variant="h5" textAlign="center">
             Iniciar Sesión
          </Typography>
 
-         <TextField label="Usuario" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
+         <TextField
+            label="Usuario"
+            variant="outlined"
+            fullWidth
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+         />
          <TextField
             label="Contraseña"
             variant="outlined"
             type="password"
+            fullWidth
             value={password}
             onChange={(e) => setPassword(e.target.value)}
          />
          {error && <Alert severity="error">{error}</Alert>}
          {success && <Alert severity="success">{success}</Alert>}
 
-         <Button variant="contained" onClick={iniciarSesion} sx={{ bgcolor: "#305e58ff" }}>
+         <Button variant="contained" fullWidth onClick={iniciarSesion} sx={{ bgcolor: "#305e58ff" }}>
             Iniciar sesión
          </Button>
       </Box>
