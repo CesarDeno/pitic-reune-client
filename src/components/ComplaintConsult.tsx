@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 import { API_URL_TEST } from "../const/api_urls";
+import { TableComponent } from "./Common/TableComponent";
 
 const meses = [
    "Enero",
@@ -25,26 +26,24 @@ const ComplaintConsult = () => {
    const [mes, setMes] = useState("Enero");
    const [anio, setAnio] = useState(new Date().getFullYear());
    const [error, setError] = useState("");
+   const [consultData, setConsultData] = useState([]);
 
    const handleConsultar = async () => {
+      setError("");
+      const token = localStorage.getItem("AUTH_TOKEN");
+      if (!token) return setError("Token no disponible");
+
+      const mesNumero = meses.indexOf(mes) + 1;
+      if (!mesNumero) return setError("Mes inválido");
+
       try {
-         setError("");
-
-         const token = localStorage.getItem("AUTH_TOKEN");
-         if (!token) throw new Error("Token no disponible");
-
-         const mesNumero = meses.indexOf(mes) + 1;
-         if (mesNumero === 0) throw new Error("Mes inválido");
-
-         const url = `${API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
-
-         const res = await axios.get(url, {
+         const { data } = await axios.get(`${API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`, {
             headers: { Authorization: token },
          });
-
-         console.log("Quejas:", res.data);
+         setConsultData(data);
       } catch (err: any) {
-         setError("Error al consultar quejas: " + err?.response?.data?.error || err.message);
+         const msg = err?.response?.data?.error || err.message || "Error desconocido";
+         setError("Error al consultar quejas: " + msg);
       }
    };
 
@@ -82,6 +81,7 @@ const ComplaintConsult = () => {
          </Box>
 
          {error && <Alert severity="error">{error}</Alert>}
+         {consultData?.length > 0 && <TableComponent data={consultData} label={"Consulta"} />}
       </Box>
    );
 };
