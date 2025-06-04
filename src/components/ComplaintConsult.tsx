@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
+import { API_URL_TEST } from "../const/api_urls";
 
 const meses = [
    "Enero",
@@ -35,7 +36,7 @@ const ComplaintConsult = () => {
          const mesNumero = meses.indexOf(mes) + 1;
          if (mesNumero === 0) throw new Error("Mes inválido");
 
-         const url = `${process.env.REACT_APP_API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
+         const url = `${API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
 
          const res = await axios.get(url, {
             headers: { Authorization: token },

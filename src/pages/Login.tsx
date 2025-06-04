@@ -1,6 +1,7 @@
 import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
+import { API_URL_TEST } from "../const/api_urls";
 
 const Login = ({ setToken }) => {
    const [username, setUsername] = useState("");
@@ -12,7 +13,7 @@ const Login = ({ setToken }) => {
       setError("");
       setSuccess("");
 
-      const url = process.env.REACT_APP_API_URL_TEST_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
+      const url = API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
       const credentials = { username, password };
 
       try {

@@ -6,6 +6,7 @@ import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers";
 import { es } from 'date-fns/locale';
+import { API_URL_TEST } from "../const/api_urls";
 
 const fieldConfig = {
    QuejasDenominacion: { label: "Denominación o razón social", type: "string", options: [] },
@@ -73,7 +74,7 @@ const Form = () => {
       if (!token) return;
       const headers = { Authorization: token };
       try {
-         await axios.post(`${process.env.REACT_APP_API_URL_TEST}/redeco/quejas`, data, {
+         await axios.post(`${API_URL_TEST}/redeco/quejas`, data, {
             headers,
          });
       } catch (err) {

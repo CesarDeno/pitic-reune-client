@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
+import { API_URL_TEST } from "../const/api_urls";
 
 type CatalogueContextType = {
    mediosRecepcion: any[];
@@ -29,9 +30,9 @@ export const CataloguesProvider = ({ children }) => {
       const fetchData = async () => {
          try {
             const [medios, niveles, prods] = await Promise.all([
-               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/medio-recepcion`, { headers }),
-               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/niveles-atencion`, { headers }),
-               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/products-list`, { headers }),
+               axios.get(`${API_URL_TEST}/catalogos/medio-recepcion`, { headers }),
+               axios.get(`${API_URL_TEST}/catalogos/niveles-atencion`, { headers }),
+               axios.get(`${API_URL_TEST}/catalogos/products-list`, { headers }),
             ]);
 
             setMediosRecepcion(medios.data);
