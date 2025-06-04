@@ -35,7 +35,7 @@ const ComplaintConsult = () => {
          const mesNumero = meses.indexOf(mes) + 1;
          if (mesNumero === 0) throw new Error("Mes inválido");
 
-         const url = `${process.env.REACT_APP_API_URL}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
+         const url = `${process.env.REACT_APP_API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
 
          const res = await axios.get(url, {
             headers: { Authorization: token },
@@ -50,7 +50,7 @@ const ComplaintConsult = () => {
    return (
       <Box display="flex" flexDirection="column" gap={2} mx="auto">
          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
-            <FormControl fullWidth sx={{ flex: 2 }}>
+            <FormControl fullWidth sx={{ flex: 2.5 }}>
                <InputLabel>Mes</InputLabel>
                <Select size="small" value={mes} label="Mes" onChange={(e) => setMes(e.target.value)}>
                   {meses.map((m, index) => {
@@ -75,7 +75,7 @@ const ComplaintConsult = () => {
                   ))}
                </Select>
             </FormControl>
-            <Button variant="contained" onClick={handleConsultar} sx={{ bgcolor: "#305e58ff", flex: 1 }}>
+            <Button variant="contained" onClick={handleConsultar} sx={{ bgcolor: "#305e58ff", flex: 1.5 }}>
                Consultar
             </Button>
          </Box>

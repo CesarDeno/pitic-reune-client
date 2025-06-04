@@ -12,7 +12,7 @@ const Login = ({ setToken }) => {
       setError("");
       setSuccess("");
 
-      const url = process.env.REACT_APP_API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
+      const url = process.env.REACT_APP_API_URL_TEST_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
       const credentials = { username, password };
 
       try {
@@ -26,9 +26,8 @@ const Login = ({ setToken }) => {
          localStorage.setItem("AUTH_TOKEN", token);
          setToken(token);
          setSuccess("Inicio de sesión exitoso ✅");
-      } catch (e) {
-         console.error(e);
-         setError("Error al iniciar sesión: " + e.message);
+      } catch (err) {
+         setError("Error al consultar quejas: " + err?.response?.data?.message || err.message)
       }
    };
 

@@ -29,9 +29,9 @@ export const CataloguesProvider = ({ children }) => {
       const fetchData = async () => {
          try {
             const [medios, niveles, prods] = await Promise.all([
-               axios.get(`${process.env.REACT_APP_API_URL}/catalogos/medio-recepcion`, { headers }),
-               axios.get(`${process.env.REACT_APP_API_URL}/catalogos/niveles-atencion`, { headers }),
-               axios.get(`${process.env.REACT_APP_API_URL}/catalogos/products-list`, { headers }),
+               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/medio-recepcion`, { headers }),
+               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/niveles-atencion`, { headers }),
+               axios.get(`${process.env.REACT_APP_API_URL_TEST}/catalogos/products-list`, { headers }),
             ]);
 
             setMediosRecepcion(medios.data);

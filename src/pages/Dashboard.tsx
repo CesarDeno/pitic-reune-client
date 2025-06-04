@@ -25,10 +25,15 @@ const Dashboard = ({ setToken }) => {
             </Button>
          </Box>
          <Box sx={{ borderBottom: 1, borderColor: "divider", display: "flex", gap: 2 }}>
-            <Tabs value={value} onChange={handleChange}>
+            <Tabs
+               value={value}
+               onChange={handleChange}
+               variant="scrollable"
+               scrollButtons="auto"
+            >
                <Tab label="Consultar quejas" />
                <Tab label="Formulario" />
-               <Tab label="Catalogos" />
+               <Tab label="Catálogos" />
             </Tabs>
          </Box>
          <CustomTabPanel value={value} index={0}>
