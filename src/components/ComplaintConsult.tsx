@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
-import { API_URL_TEST } from "../const/api_urls";
+import { API_URL } from "../const/api_urls";
 import { TableComponent } from "./Common/TableComponent";
 
 const meses = [
@@ -37,10 +37,14 @@ const ComplaintConsult = () => {
       if (!mesNumero) return setError("Mes inválido");
 
       try {
-         const { data } = await axios.get(`${API_URL_TEST}/redeco/quejas/?year=${anio}&month=${mesNumero}`, {
+         const { data } = await axios.get(`${API_URL}/redeco/quejas/?year=${anio}&month=${mesNumero}`, {
             headers: { Authorization: token },
          });
-         setConsultData(data);
+         setConsultData(data?.quejas);
+
+         if (Array.isArray(data?.quejas) && data?.quejas.length === 0) {
+            setError("No se encontraron quejas para ese mes y año.");
+         }
       } catch (err: any) {
          const msg = err?.response?.data?.error || err.message || "Error desconocido";
          setError("Error al consultar quejas: " + msg);
