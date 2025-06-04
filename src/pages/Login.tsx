@@ -1,7 +1,7 @@
+import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import { useState } from "react";
-import { TextField, Button, Box, Typography, Alert } from "@mui/material";
 
-export default function Login({ setToken }) {
+const Login = ({ setToken }) => {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [error, setError] = useState("");
@@ -36,7 +36,15 @@ export default function Login({ setToken }) {
    };
 
    return (
-      <Box maxWidth={300} margin="auto" mt={10} display="flex" flexDirection="column" gap={2}>
+      <Box
+         minWidth={300}
+         margin="auto"
+         mt={10}
+         display="flex"
+         flexDirection="column"
+         gap={2}
+         sx={{ borderRadius: 2, boxShadow: 2, p: 5, bgcolor: "white" }}
+      >
          <Typography variant="h5" textAlign="center">
             REDECO
          </Typography>
@@ -60,4 +68,6 @@ export default function Login({ setToken }) {
          </Button>
       </Box>
    );
-}
+};
+
+export default Login;
