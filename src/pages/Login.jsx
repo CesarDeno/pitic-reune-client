@@ -1,0 +1,65 @@
+import { useState } from "react";
+import { TextField, Button, Box, Typography, Alert } from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+export default function Login() {
+   const [username, setUsername] = useState("");
+   const [password, setPassword] = useState("");
+   const [error, setError] = useState("");
+   const [success, setSuccess] = useState("");
+   const navigate = useNavigate();
+
+   const iniciarSesion = async () => {
+      setError("");
+      setSuccess("");
+
+      const url = process.env.REACT_APP_API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
+      const credentials = { username, password };
+      try {
+         const response = await fetch(url, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(credentials),
+         });
+
+         if (!response.ok) throw new Error("Usuario o contraseña incorrectos");
+
+         const data = await response.json();
+         const token = data.user?.token_access;
+         if (!token) throw new Error("Token no encontrado en la respuesta");
+
+         localStorage.setItem("AUTH_TOKEN", token);
+         setSuccess("Inicio de sesión exitoso ✅");
+         navigate("/inicio");
+      } catch (e) {
+         console.error(e);
+         setError("Error al iniciar sesión: " + e.message);
+      }
+   };
+
+   return (
+      <Box maxWidth={300} margin="auto" mt={10} display="flex" flexDirection="column" gap={2}>
+         <Typography variant="h5" textAlign="center">
+            REDECO
+         </Typography>
+         <Typography variant="h5" textAlign="center">
+            Iniciar Sesión
+         </Typography>
+
+         <TextField label="Usuario" variant="outlined" value={username} onChange={(e) => setUsername(e.target.value)} />
+         <TextField
+            label="Contraseña"
+            variant="outlined"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+         />
+         {error && <Alert severity="error">{error}</Alert>}
+         {success && <Alert severity="success">{success}</Alert>}
+
+         <Button variant="contained" onClick={iniciarSesion} sx={{ bgcolor: "#305e58ff" }}>
+            Iniciar sesión
+         </Button>
+      </Box>
+   );
+}

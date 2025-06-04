@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import { useMemo } from "react";
+
+function AppRoutes() {
+   const location = useLocation();
+   const token = useMemo(
+      () => localStorage.getItem("AUTH_TOKEN"),
+      // eslint-disable-next-line
+      [location]
+   );
+
+   return (
+      <Routes>
+         <Route path="/login" element={!token ? <Login /> : <Navigate to="/inicio" />} />
+         <Route path="/inicio" element={token ? <Dashboard /> : <Navigate to="/login" />} />
+      </Routes>
+   );
+}
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+   return (
+      <BrowserRouter>
+         <AppRoutes />
+      </BrowserRouter>
+   );
 }
 
 export default App;
