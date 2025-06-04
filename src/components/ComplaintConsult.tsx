@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
-import { API_URL } from "../const/api_urls";
 import { TableComponent } from "./Common/TableComponent";
+import { API_URL_TEST } from "../const/api_urls";
 
 const meses = [
    "Enero",
@@ -37,7 +37,7 @@ const ComplaintConsult = () => {
       if (!mesNumero) return setError("Mes inválido");
 
       try {
-         const { data } = await axios.get(`${API_URL}/redeco/quejas/?year=${anio}&month=${mesNumero}`, {
+         const { data } = await axios.get(`${API_URL_TEST}/reune/quejas/?year=${anio}&month=${mesNumero}`, {
             headers: { Authorization: token },
          });
          setConsultData(data?.quejas);

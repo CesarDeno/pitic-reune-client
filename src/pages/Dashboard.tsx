@@ -19,7 +19,7 @@ const Dashboard = ({ setToken }) => {
    return (
       <Stack>
          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Typography sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff", mx: 2 }}>REDECO</Typography>
+            <Typography sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff", mx: 2 }}>reune</Typography>
             <Button variant="contained" onClick={handleLogout} sx={{ bgcolor: "#305e58ff" }}>
                Cerrar sesión
             </Button>

@@ -1,7 +1,7 @@
 import { Alert, Box, Button, TextField, Typography } from "@mui/material";
 import axios from "axios";
 import { useState } from "react";
-import { API_URL } from "../const/api_urls";
+import { API_URL_TEST } from "../const/api_urls";
 
 const Login = ({ setToken }) => {
    const [username, setUsername] = useState("");
@@ -13,7 +13,7 @@ const Login = ({ setToken }) => {
       setError("");
       setSuccess("");
 
-      const url = API_URL?.replace(/\/+$/, "") + "/auth/users/token/";
+      const url = API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
       const credentials = { username, password };
 
       try {
@@ -28,7 +28,7 @@ const Login = ({ setToken }) => {
          setToken(token);
          setSuccess("Inicio de sesión exitoso ✅");
       } catch (err) {
-         setError("Error al consultar quejas: " + err?.response?.data?.message || err.message)
+         setError("Error al consultar quejas: " + err?.response?.data?.message || err.message);
       }
    };
 
@@ -42,7 +42,7 @@ const Login = ({ setToken }) => {
          }}
       >
          <Typography textAlign="center" sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff" }}>
-            REDECO
+            REUNE
          </Typography>
          <Typography variant="h5" textAlign="center">
             Iniciar Sesión
