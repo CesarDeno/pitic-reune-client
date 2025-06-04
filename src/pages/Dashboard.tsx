@@ -1,6 +1,8 @@
 import { Box, Button, Stack, Tab, Tabs, Typography } from "@mui/material";
 import { useState } from "react";
 import ComplaintConsult from "../components/ComplaintConsult";
+import Catalogues from "../components/Catalogues";
+import Form from "../components/Form";
 
 const Dashboard = ({ setToken }) => {
    const [value, setValue] = useState(0);
@@ -15,9 +17,9 @@ const Dashboard = ({ setToken }) => {
    };
 
    return (
-      <Stack sx={{ borderRadius: 2, boxShadow: 2, p: 5, bgcolor: "white", height: "70vh", width: "70vw" }}>
+      <Stack>
          <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-            <Typography sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff" }}>REDECO</Typography>
+            <Typography sx={{ fontWeight: "bold", fontSize: 24, color: "#305e58ff", mx: 2 }}>REDECO</Typography>
             <Button variant="contained" onClick={handleLogout} sx={{ bgcolor: "#305e58ff" }}>
                Cerrar sesión
             </Button>
@@ -26,17 +28,17 @@ const Dashboard = ({ setToken }) => {
             <Tabs value={value} onChange={handleChange}>
                <Tab label="Consultar quejas" />
                <Tab label="Formulario" />
-               <Tab label="Historial" />
+               <Tab label="Catalogos" />
             </Tabs>
          </Box>
          <CustomTabPanel value={value} index={0}>
             <ComplaintConsult />
          </CustomTabPanel>
          <CustomTabPanel value={value} index={1}>
-            Item Two
+            <Form />
          </CustomTabPanel>
          <CustomTabPanel value={value} index={2}>
-            Item Three
+            <Catalogues />
          </CustomTabPanel>
       </Stack>
    );

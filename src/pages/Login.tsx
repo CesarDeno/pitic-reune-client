@@ -1,4 +1,5 @@
 import { Alert, Box, Button, TextField, Typography } from "@mui/material";
+import axios from "axios";
 import { useState } from "react";
 
 const Login = ({ setToken }) => {
@@ -14,16 +15,11 @@ const Login = ({ setToken }) => {
       const url = process.env.REACT_APP_API_URL_TEST?.replace(/\/+$/, "") + "/auth/users/token/";
       const credentials = { username, password };
       try {
-         const response = await fetch(url, {
-            method: "POST",
+         const response = await axios.post(url, credentials, {
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(credentials),
          });
 
-         if (!response.ok) throw new Error("Usuario o contraseña incorrectos");
-
-         const data = await response.json();
-         const token = data.user?.token_access;
+         const token = response.data.user?.token_access;
          if (!token) throw new Error("Token no encontrado en la respuesta");
 
          localStorage.setItem("AUTH_TOKEN", token);

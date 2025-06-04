@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select, Typography } from "@mui/material";
+import { Alert, Box, Button, FormControl, InputLabel, MenuItem, Select } from "@mui/material";
 import axios from "axios";
 
 const meses = [
@@ -35,8 +35,7 @@ const ComplaintConsult = () => {
          const mesNumero = meses.indexOf(mes) + 1;
          if (mesNumero === 0) throw new Error("Mes inválido");
 
-         const baseUrl = process.env.REACT_APP_API_URL_TEST?.replace(/\/+$/, "");
-         const url = `${baseUrl}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
+         const url = `${process.env.REACT_APP_API_URL}/redeco/quejas/?year=${anio}&month=${mesNumero}`;
 
          const res = await axios.get(url, {
             headers: { Authorization: token },
@@ -50,7 +49,6 @@ const ComplaintConsult = () => {
 
    return (
       <Box display="flex" flexDirection="column" gap={2} mx="auto">
-         <Typography variant="h6">Consultar quejas por mes y año</Typography>
          <Box sx={{ display: "flex", gap: 2, alignItems: "center" }}>
             <FormControl fullWidth sx={{ flex: 2 }}>
                <InputLabel>Mes</InputLabel>
