@@ -13,34 +13,34 @@ function App() {
    }, []);
 
    return (
-      <CataloguesProvider>
-         <Container
-            maxWidth={false}
-            disableGutters
+      // <CataloguesProvider>
+      <Container
+         maxWidth={false}
+         disableGutters
+         sx={{
+            bgcolor: "whitesmoke",
+            minHeight: "100vh",
+            width: "100vw",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            p: { xs: 2, sm: 4, md: 6 },
+         }}
+      >
+         <Box
             sx={{
-               bgcolor: "whitesmoke",
-               minHeight: "100vh",
-               width: "100vw",
-               display: "flex",
-               justifyContent: "center",
-               alignItems: "center",
-               p: { xs: 2, sm: 4, md: 6 },
+               width: "100%",
+               maxWidth: 600,
+               bgcolor: "white",
+               borderRadius: 2,
+               boxShadow: 3,
+               p: { xs: 2, sm: 3 },
             }}
          >
-            <Box
-               sx={{
-                  width: "100%",
-                  maxWidth: 600,
-                  bgcolor: "white",
-                  borderRadius: 2,
-                  boxShadow: 3,
-                  p: { xs: 2, sm: 3 },
-               }}
-            >
-               {token ? <Dashboard setToken={setToken} /> : <Login setToken={setToken} />}
-            </Box>
-         </Container>
-      </CataloguesProvider>
+            {token ? <Dashboard setToken={setToken} /> : <Login setToken={setToken} />}
+         </Box>
+      </Container>
+      // </CataloguesProvider>
    );
 }
 
