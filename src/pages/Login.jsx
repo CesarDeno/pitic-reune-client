@@ -1,13 +1,11 @@
 import { useState } from "react";
 import { TextField, Button, Box, Typography, Alert } from "@mui/material";
-import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ setToken }) {
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
    const [error, setError] = useState("");
    const [success, setSuccess] = useState("");
-   const navigate = useNavigate();
 
    const iniciarSesion = async () => {
       setError("");
@@ -29,8 +27,8 @@ export default function Login() {
          if (!token) throw new Error("Token no encontrado en la respuesta");
 
          localStorage.setItem("AUTH_TOKEN", token);
+         setToken(token);
          setSuccess("Inicio de sesión exitoso ✅");
-         navigate("/inicio");
       } catch (e) {
          console.error(e);
          setError("Error al iniciar sesión: " + e.message);
